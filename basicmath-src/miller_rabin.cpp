@@ -105,20 +105,3 @@ bool miller_rabin(int n, int s) noexcept
     }
     return true;
 }
-
-/**
- * @brief
- * is_prime implementation.
- * 
- * @details
- * Does input checking for valid inputs.
- * If everything is okay, calls miller_rabin using S=100.
-*/
-bool is_prime(int n)
-{
-    if (n <= 0)
-    {
-        throw std::invalid_argument("Number must be positive.");
-    }
-    return miller_rabin(n, 100);
-}

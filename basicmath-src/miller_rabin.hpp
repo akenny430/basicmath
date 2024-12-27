@@ -3,15 +3,14 @@
 
 /**
  * @brief
- * Checks if a number is prime.
+ * Checks if number is prime using Miller-Rabin prime tester.
  * 
- * @param n number to test for prime.
+ * @param n Number to test.
+ * @param s Number of iterations.
  * 
- * @returns true if number is prime, else false.
- * 
- * @details
- * Implements Miller-Rabin prime tester with S=100 iterations.
- */
-bool is_prime(int n);
+ * @returns
+ * true if number is prime, false if number is not prime.
+*/
+bool miller_rabin(int n, int s) noexcept;
 
 #endif
