@@ -1,0 +1,5 @@
+# virtual environment with this package
+.venv
+
+# any outputs from building package
+build
