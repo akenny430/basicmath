@@ -8,16 +8,17 @@ project(
 
 find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
 
-set(PYBIND11_NEWPYTHON ON)
-find_package(pybind11 CONFIG REQUIRED)
+find_package(nanobind CONFIG REQUIRED)
 
-pybind11_add_module(
-    _basicmath MODULE
-    basicmath-src/_basicmath.cpp
+nanobind_add_module(
+    _basicmath
+    STABLE_ABI
+    NB_STATIC
+    # binding file
+    basicmath-src/bindings-nanobind.cpp
+    # src files
     basicmath-src/miller_rabin.cpp
     basicmath-src/miller_rabin.hpp
 )
-target_link_libraries(_basicmath PRIVATE pybind11::headers)
-target_compile_definitions(_basicmath PRIVATE VERSION_INFO=${PROJECT_VERSION})
 
-install(TARGETS _basicmath DESTINATION ${SKBUILD_PROJECT_NAME})
+install(TARGETS _basicmath LIBRARY DESTINATION basicmath)
