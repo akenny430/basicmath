@@ -11,8 +11,6 @@ find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
 set(PYBIND11_NEWPYTHON ON)
 find_package(pybind11 CONFIG REQUIRED)
 
-# pybind11_add_module(_basicmath MODULE basicmath-src/_basicmath.cpp)
-# python_add_library(_basicmath MODULE basicmath-src/_basicmath.cpp WITH_SOABI)
 pybind11_add_module(
     _basicmath MODULE
     basicmath-src/_basicmath.cpp
@@ -22,5 +20,4 @@ pybind11_add_module(
 target_link_libraries(_basicmath PRIVATE pybind11::headers)
 target_compile_definitions(_basicmath PRIVATE VERSION_INFO=${PROJECT_VERSION})
 
-# install(TARGETS _basicmath LIBRARY DESTINATION ${SKBUILD_PROJECT_NAME})
 install(TARGETS _basicmath DESTINATION ${SKBUILD_PROJECT_NAME})
