@@ -5,9 +5,9 @@ import basicmath as bm
 
 # checking primes for each
 N_PRIMES: int = 100
-prime_count: int = 0
+prime_count: int = 1
 prime_data: list[tuple[int, int]] = []
-for n in range(1, N_PRIMES + 1):
+for n in range(2, N_PRIMES + 1):
     if bm.check_prime(n):
         prime_count += 1
     prime_data.append((n, prime_count))
