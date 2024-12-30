@@ -2,8 +2,8 @@ from pathlib import Path
 
 import basicmath as bm
 
-
-NUMBERS_TO_CHECK: list[int] = [int(10**k) for k in range(1, 8)]
+MAX_POWERS: int = 4  # TODO: can go up to 12
+NUMBERS_TO_CHECK: list[int] = [int(10**k) for k in range(1, MAX_POWERS)]
 MAX_NUMBERS: int = NUMBERS_TO_CHECK[-1]
 
 # reading results of prime count
@@ -15,8 +15,8 @@ with open(
 ) as rf:
     rf.readline()
     for rl in rf.readlines():
-        n, c = rl.split(",")
-        PRIME_RESULTS[10 ** int(n)] = int(c)
+        k, c = rl.split(",")
+        PRIME_RESULTS[10 ** int(k)] = int(c)
 
 
 def test_prime_count() -> None:
@@ -36,8 +36,8 @@ def test_prime_count() -> None:
 
     # checking that results match up
     for n, c in test_results.items():
-        print(c == PRIME_RESULTS.get(n))
-        print(f"{n}: {c} vs. {PRIME_RESULTS.get(n)}")
+        assert c == PRIME_RESULTS.get(n)
+        # print(f"{n}: {c} vs. {PRIME_RESULTS.get(n)}")
 
 
 if __name__ == "__main__":
