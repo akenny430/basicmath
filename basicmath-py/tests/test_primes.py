@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import basicmath as bm
 
 
@@ -6,7 +8,11 @@ MAX_NUMBERS: int = NUMBERS_TO_CHECK[-1]
 
 # reading results of prime count
 PRIME_RESULTS: dict[int, int] = {}
-with open(file="./data/prime_counts_results.csv", mode="r", encoding="utf8") as rf:
+with open(
+    file=Path(__file__).parent / "data" / "prime_counts_results.csv",
+    mode="r",
+    encoding="utf8",
+) as rf:
     rf.readline()
     for rl in rf.readlines():
         n, c = rl.split(",")
