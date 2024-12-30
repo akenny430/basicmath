@@ -15,7 +15,7 @@ nanobind_add_module(
     STABLE_ABI
     NB_STATIC
     # binding file
-    basicmath-src/bindings-nanobind.cpp
+    basicmath-src/py_bindings.cpp
     # src files
     basicmath-src/miller_rabin.cpp
     basicmath-src/miller_rabin.hpp
