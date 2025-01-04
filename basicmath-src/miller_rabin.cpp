@@ -1,35 +1,47 @@
-#include <stdexcept>
+#include <cstdint>
 #include <stdlib.h>
 
 #include "miller_rabin.hpp"
 
 /**
  * @brief
- * Taking the mod of an exponential number, a^c mod n,
- * specific to integer inputs.
+ * Taking the mod of an exponential number, a^b mod n,
+ * specific to non-negative integer inputs.
  *
  * @param a base.
- * @param b limit of increments to c.
+ * @param b power.
  * @param n modulus.
  *
- * @returns integer representing a^c mod n.
+ * @returns UInt64 representing a^b mod n.
  *
  * @details
  * Implements `MODULAR-EXPONENTIATION` from Cormen, Section 31.6 Page 957.
  */
-int mod_exponentiation(int a, unsigned b, int n) noexcept
+std::uint64_t mod_exponentiation(std::uint64_t a, std::uint64_t b, std::uint64_t n) noexcept
 {
-    int c = 0;
-    int d = 1;
-    for (unsigned k = 1 << 31; k > 0; k = k / 2)
+    // setup
+    std::uint64_t c = 0;
+    std::uint64_t d = 1;
+
+    // holding bit to move through, has 1 in first bit place
+    std::uint64_t bit_holder = 0b1000000000000000000000000000000000000000000000000000000000000000;
+
+    // loop through all bits, will end once bit_holder is 0
+    while (bit_holder)
     {
+        // do this every step
         c *= 2;
         d = (d * d) % n;
-        if (b & k)
+
+        // if this bit is active, do extra
+        if (b & bit_holder)
         {
             c += 1;
             d = (d * a) % n;
         }
+
+        // shift bit
+        bit_holder >>= 1;
     }
     return d;
 }
