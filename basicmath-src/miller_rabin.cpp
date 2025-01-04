@@ -58,21 +58,23 @@ std::uint64_t mod_exponentiation(std::uint64_t a, std::uint64_t b, std::uint64_t
  * @details
  * Implements `WITNESS` from Cormen, Section 31.8 Page 969.
  */
-bool check_composite_from_witness(int n, int a) noexcept
+bool check_composite_from_witness(std::uint64_t n, std::uint64_t a) noexcept
 {
     // figuring out what t and u have to be from n
-    int m = n - 1;
-    int t = 0;
-    while (m % 2 == 0)
+    std::uint64_t u = n - 1;
+    std::uint64_t t = 0;
+    while (u % 2 == 0)
     {
         ++t;
-        m /= 2;
+        u /= 2;
     }
-    unsigned u = (unsigned)m;
 
-    int x0 = mod_exponentiation(a, u, n);
-    int x1;
-    for (int i = 0; i < t; ++i)
+    // compute mod exponentiation a^u mod n
+    std::uint64_t x0 = mod_exponentiation(a, u, n);
+    std::uint64_t x1;
+
+    // checking up to t
+    for (std::uint64_t i = 0; i < t; ++i)
     {
         x1 = (x0 * x0) % n;
         if (x1 == 1 && x0 != 1 && x0 != n - 1)
