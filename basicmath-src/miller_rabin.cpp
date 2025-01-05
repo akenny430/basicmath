@@ -13,10 +13,36 @@
  * @param n modulus.
  *
  * @returns uint64 representing (a * b) mod n.
+ *
+ * @details
+ * This is fundamentally based on the reduction formula
+ * (a * b) % n = ((a % n) * (b % n)) % n.
+ * We then iteratively step through the binary representation of b.
  */
 std::uint64_t mod_product(std::uint64_t a, std::uint64_t b, std::uint64_t n) noexcept
 {
-    return ((a % n) * (b % n)) % n;
+    std::uint64_t result = 0;
+
+    // intermediate computation of a % n
+    a %= n;
+
+    // looping through all bits of b
+    while (b)
+    {
+        // if least significant bit is active, add a to the result
+        if (b & 1)
+        {
+            result = (result + a) % n;
+        }
+
+        // right bit shift b
+        b >>= 1;
+
+        // double a to prepare for the next bit of n
+        a = (2 * a) % n;
+    }
+
+    return result;
 }
 
 /**
