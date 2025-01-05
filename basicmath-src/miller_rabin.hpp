@@ -1,6 +1,8 @@
 #ifndef PRIME_H
 #define PRIME_H
 
+#include <cstdint>
+
 /**
  * @brief
  * Checks if number is prime using Miller-Rabin prime tester.
@@ -11,6 +13,6 @@
  * @returns
  * true if number is prime, false if number is not prime.
  */
-bool miller_rabin(int n, int s) noexcept;
+bool miller_rabin(std::uint64_t n, int s) noexcept;
 
 #endif

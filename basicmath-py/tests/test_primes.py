@@ -2,7 +2,7 @@ from pathlib import Path
 
 import basicmath as bm
 
-MAX_POWERS: int = 4  # TODO: can go up to 12
+MAX_POWERS: int = 7  # TODO: can go up to 12
 NUMBERS_TO_CHECK: list[int] = [int(10**k) for k in range(1, MAX_POWERS)]
 MAX_NUMBERS: int = NUMBERS_TO_CHECK[-1]
 
@@ -38,6 +38,32 @@ def test_prime_count() -> None:
     for n, c in test_results.items():
         assert c == PRIME_RESULTS.get(n)
         # print(f"{n}: {c} vs. {PRIME_RESULTS.get(n)}")
+
+
+def test_large_primes() -> None:
+    """
+    Testing prime count for large primes.
+
+    Useful URL:
+    https://markknowsnothing.weebly.com/primes.html
+    """
+    # billions
+    assert bm.check_prime(1_000_082_257)
+    assert bm.check_prime(314_159_265_359)
+
+    # trillions
+    assert bm.check_prime(1_000_000_071_143)
+    assert bm.check_prime(1_000_000_026_959)
+    assert bm.check_prime(1_000_000_099_643)
+
+    # (almost) quadrillions
+    assert bm.check_prime(900_000_000_014_261)
+    assert bm.check_prime(950_000_000_072_087)
+    assert bm.check_prime(999_999_999_999_989)
+
+    # values that should fail
+    assert not bm.check_prime(101_010_101_010)
+    assert not bm.check_prime(999_999_999_999_998)
 
 
 if __name__ == "__main__":
