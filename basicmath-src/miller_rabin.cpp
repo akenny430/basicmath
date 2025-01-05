@@ -1,5 +1,5 @@
 #include <cstdint>
-#include <stdlib.h>
+#include <random>
 
 #include "miller_rabin.hpp"
 
@@ -97,7 +97,7 @@ bool check_composite_from_witness(std::uint64_t n, std::uint64_t a) noexcept
  * @details
  * Implements `MILLER-RABIN` from Cormen, Section 31.8 Page 970.
  */
-bool miller_rabin(int n, int s) noexcept
+bool miller_rabin(std::uint64_t n, int s) noexcept
 {
     // false if number is even or less than 2
     if (n % 2 == 0 || n < 2)
@@ -105,11 +105,17 @@ bool miller_rabin(int n, int s) noexcept
         return false;
     }
 
+    // setting up random number generation for Unif(1, n - 1)
+    std::random_device rand_dev;
+    std::mt19937_64 rand_rng(rand_dev());
+    std::uniform_int_distribution<std::uint64_t> rand_dist(1, n - 1);
+
     // looping through max number of iterations
+    std::uint64_t a;
     for (int k = 0; k < s; ++k)
     {
-        // generates random number between 1 and n - 1
-        int a = (rand() % (n - 1)) + 1;
+        // generates new number
+        a = rand_dist(rand_rng);
 
         // return false if number is composite
         if (check_composite_from_witness(n, a))
@@ -117,5 +123,7 @@ bool miller_rabin(int n, int s) noexcept
             return false;
         }
     }
+
+    // after s checks, returns true
     return true;
 }
