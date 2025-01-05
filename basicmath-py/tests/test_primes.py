@@ -2,7 +2,7 @@ from pathlib import Path
 
 import basicmath as bm
 
-MAX_POWERS: int = 4  # TODO: can go up to 12
+MAX_POWERS: int = 7  # TODO: can go up to 12
 NUMBERS_TO_CHECK: list[int] = [int(10**k) for k in range(1, MAX_POWERS)]
 MAX_NUMBERS: int = NUMBERS_TO_CHECK[-1]
 
