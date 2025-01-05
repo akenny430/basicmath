@@ -58,11 +58,17 @@ std::uint64_t mod_product(std::uint64_t a, std::uint64_t b, std::uint64_t n) noe
  *
  * @details
  * Implements `MODULAR-EXPONENTIATION` from Cormen, Section 31.6 Page 957.
+ *
+ * @note
+ * In this code, there is a variable `c` that is commented out.
+ * It is used in the loop invariant from the algorithm as presented by Cormen.
+ * In other cases, it may be useful to track/store the value of `c`,
+ * but for pure computation it is not necessary.
  */
 std::uint64_t mod_exponentiation(std::uint64_t a, std::uint64_t b, std::uint64_t n) noexcept
 {
     // setup
-    std::uint64_t c = 0;
+    // std::uint64_t c = 0;
     std::uint64_t d = 1;
 
     // holding bit to move through, has 1 in first bit place
@@ -72,13 +78,13 @@ std::uint64_t mod_exponentiation(std::uint64_t a, std::uint64_t b, std::uint64_t
     while (bit_holder)
     {
         // do this every step
-        c *= 2;
+        // c *= 2;
         d = mod_product(d, d, n);
 
         // if this bit is active, do extra
         if (b & bit_holder)
         {
-            c += 1;
+            // c += 1;
             d = mod_product(d, a, n);
         }
 
