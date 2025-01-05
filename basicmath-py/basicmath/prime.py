@@ -4,7 +4,7 @@ from ._basicmath import miller_rabin
 def check_prime(
     n: int,
     *,
-    num_checks: int = 50,
+    num_checks: int = 5,
 ) -> bool:
     """
     Checks if number is prime or not.
