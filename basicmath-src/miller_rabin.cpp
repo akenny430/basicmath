@@ -5,6 +5,22 @@
 
 /**
  * @brief
+ * Taking the mod of a product of two numbers, (a * b) mod n,
+ * specific to non-negative integer inputs.
+ *
+ * @param a first number.
+ * @param b second number.
+ * @param n modulus.
+ *
+ * @returns uint64 representing (a * b) mod n.
+ */
+std::uint64_t mod_product(std::uint64_t a, std::uint64_t b, std::uint64_t n) noexcept
+{
+    return ((a % n) * (b % n)) % n;
+}
+
+/**
+ * @brief
  * Taking the mod of an exponential number, a^b mod n,
  * specific to non-negative integer inputs.
  *
@@ -12,7 +28,7 @@
  * @param b power.
  * @param n modulus.
  *
- * @returns UInt64 representing a^b mod n.
+ * @returns uint64 representing a^b mod n.
  *
  * @details
  * Implements `MODULAR-EXPONENTIATION` from Cormen, Section 31.6 Page 957.
@@ -31,13 +47,13 @@ std::uint64_t mod_exponentiation(std::uint64_t a, std::uint64_t b, std::uint64_t
     {
         // do this every step
         c *= 2;
-        d = (d * d) % n;
+        d = mod_product(d, d, n);
 
         // if this bit is active, do extra
         if (b & bit_holder)
         {
             c += 1;
-            d = (d * a) % n;
+            d = mod_product(d, a, n);
         }
 
         // shift bit
@@ -76,7 +92,7 @@ bool check_composite_from_witness(std::uint64_t n, std::uint64_t a) noexcept
     // checking up to t
     for (std::uint64_t i = 0; i < t; ++i)
     {
-        x1 = (x0 * x0) % n;
+        x1 = mod_product(x0, x0, n);
         if (x1 == 1 && x0 != 1 && x0 != n - 1)
         {
             return true;
