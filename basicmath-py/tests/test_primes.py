@@ -40,5 +40,16 @@ def test_prime_count() -> None:
         # print(f"{n}: {c} vs. {PRIME_RESULTS.get(n)}")
 
 
+def test_large_primes() -> None:
+    """
+    Testing prime count for large primes.
+
+    Useful URL:
+    https://markknowsnothing.weebly.com/primes.html
+    """
+    assert bm.check_prime(1_000_082_257)
+    # assert bm.check_prime(1000000071143)
+
+
 if __name__ == "__main__":
     test_prime_count()
