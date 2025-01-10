@@ -2,7 +2,7 @@
 
 This module shows an example
 of a Python library structure
-using [nanobind](https://nanobind.readthedocs.io/en/latest/).
+using [`nanobind`](https://nanobind.readthedocs.io/en/latest/).
 
 ## Installation
 
@@ -73,3 +73,17 @@ while the Rust source is in the `crates` directory.
 - [`pytorch`](https://github.com/pytorch/pytorch/tree/main):
 The Python library is in the `torch` directory,
 while the C++ source is in the `aten` directory.
+
+## Pybind11
+
+While this project is based on the newer `nanobind`,
+there is also the more established [`pybind11`](https://pybind11.readthedocs.io/en/stable/).
+
+Examples of corresponding binding and CMake files for `pybind11`
+can be found in the `_pybind11_files` directory.
+
+Both `nanobind` and `pybind11` are authored by
+[Wenzel Jakob](https://rgl.epfl.ch/people/wjakob).
+He gives a write-up of his motivations behind `nanobind`
+[here](https://nanobind.readthedocs.io/en/latest/why.html),
+and also recommends that current `pybind11` users migrate over to `nanobind`.
