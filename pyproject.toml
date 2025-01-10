@@ -1,6 +1,19 @@
 [project]
 name = "basicmath"
 version = "1.0"
+authors = [
+    {name="Aiden Kenny", email="akenny430@gmail.com"},
+]
+description = "Basic math functionality with Python and C++"
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Homepage = "https://github.com/akenny430/basicmath"
 
 [build-system]
 requires = [
